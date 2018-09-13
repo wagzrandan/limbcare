@@ -6,6 +6,7 @@ use App\Models\Auth\Role\Role;
 use App\Models\Auth\User\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use Validator;
 
 class UserController extends Controller

@@ -67,10 +67,23 @@ return [
     */
 
     'providers' => [
+        'doctors' => [
+            'driver' => 'eloquent',
+            'model' => Doctor::class,
+        ],
+
+
+        // 'users' => [
+        //     'driver' => 'database',
+        //     'table' => 'users',
+        // ],
+    ],
+    'providers' => [
         'users' => [
             'driver' => 'eloquent',
             'model' => User::class,
         ],
+
 
         // 'users' => [
         //     'driver' => 'database',

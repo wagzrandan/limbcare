@@ -53,6 +53,49 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Dashboard
     Route::get('/', 'DashboardController@index')->name('dashboard');
 
+    //Employee
+    Route::get('employees', 'EmployeeController@index')->name('employees');
+    // Route::get('users/{user}', 'UserController@show')->name('users.show');
+    // Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
+    // Route::put('users/{user}', 'UserController@update')->name('users.update');
+    // Route::delete('users/{user}', 'UserController@destroy')->name('users.destroy');
+
+    //Appointment
+    Route::get('appointments', 'AppointmentController@index')->name('appointments');
+
+    //Doctor
+    Route::get('doctors', 'DoctorController@index')->name('doctors');
+    Route::get('doctors/{doctor}/edit', 'DoctorController@edit')->name('doctors.edit');
+
+    Route::get('doctors/add', 'DoctorController@add')->name('doctors.add');
+    Route::get('doctors/{doctor}', 'DoctorController@show')->name('doctors.show');
+    Route::post('doctors/{doctor}/editdoc','doctorController@update');
+
+    Route::put('doctors/update' , 'DoctorController@update')->name('doctors.update');
+    Route::delete('doctors/{user}', 'DoctorController@destroy')->name('doctors.destroy');
+    Route::get('doctors/del', 'DoctorController@delete')->name('doctors.delete');
+    Route::delete('doctors/{doctor}/delete', 'DoctorController@destroy')->name('doctor.delete');
+
+    //  Route::get('doctors', 'DoctorController@delete')->name('doctors.delete');
+
+    Route::post('doctors/cal','DoctorController@create');
+    Route::post('doctors/edit','DoctorController@update');
+
+    //Financial
+    Route::get('financial', 'FinancialController@index')->name('financial');
+
+    //Patient
+    Route::get('patient', 'PatientController@index')->name('patients');
+
+    //Services
+    Route::get('services', 'ServiceController@index')->name('services');
+
+    //Store
+    Route::get('store', 'StoreController@index')->name('store');
+
+    //Financial
+    Route::get('question_forum', 'QuestionsForumController@index')->name('question_forum');
+
     //Users
     Route::get('users', 'UserController@index')->name('users');
     Route::get('users/{user}', 'UserController@show')->name('users.show');
@@ -65,12 +108,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('dashboard/registration-chart', 'DashboardController@getRegistrationChartData')->name('dashboard.registration.chart');
 });
 
-
 Route::get('/', 'HomeController@index');
 Route::get('/aboutus', 'AboutUsController@aboutus');
 Route::get('/services', 'ServicesController@services');
 Route::get('/contact', 'ContactController@contact');
-
+Route::get('/wageesha', 'WageeshaController@index');
 /**
  * Membership
  */

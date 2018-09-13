@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html lang="<?php echo e(config('app.locale')); ?>">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
         <!-- Meta title & meta -->
-    @meta
+    <?php print app('meta')->render(); ?>
 
     <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -82,42 +82,39 @@
         </style>
 
         <!-- Laravel variables for js -->
-        @tojs
+        <script> window.Laravel = {"locale":"en"}</script>
     </head>
     <body>
         <div class="flex-center position-ref full-height">
                 <div class="top-left brand">
-                    {{ HTML::image('img/logo.png', 'Limb Care') }}
+                    <?php echo e(HTML::image('img/logo.png', 'Limb Care')); ?>
+
                 </div>
                 <div class="top-right links">
-                    <a href="{{ url('/') }}">{{ __('views.welcome.home') }}</a>
-                    <a href="{{ url('/aboutus') }}">About Us</a>
-                    <a href="{{ url('/services') }}">Services</a>
-                    <a href="{{ url('/contact') }}">Contact</a>
-                    {{-- <a href="{{ route('protection.membership') }}">{{ __('views.welcome.member_area') }}</a> --}}
+                    <a href="<?php echo e(url('/')); ?>"><?php echo e(__('views.welcome.home')); ?></a>
+                    <a href="<?php echo e(url('/aboutus')); ?>">About Us</a>
+                    <a href="<?php echo e(url('/services')); ?>">Services</a>
+                    <a href="<?php echo e(url('/contact')); ?>">Contact</a>
                     
-                    @if (Route::has('login'))
-                        @if (!Auth::check())
-                            @if(config('auth.users.registration'))
-                                {{-- <a href="{{ url('/register') }}">{{ __('views.welcome.register') }}</a> --}}
-                            @endif
-                            <a href="{{ url('/login') }}">{{ __('views.welcome.login') }}</a>
-                        @else
-                            @if(auth()->user()->hasRole('administrator'))
-                                <a href="{{ url('/admin') }}">{{ __('views.welcome.admin') }}</a>
-                            @endif
-                            <a href="{{ url('/logout') }}">{{ __('views.welcome.logout') }}</a>
-                        @endif
-                    @endif
+                    
+                    <?php if(Route::has('login')): ?>
+                        <?php if(!Auth::check()): ?>
+                            <?php if(config('auth.users.registration')): ?>
+                                
+                            <?php endif; ?>
+                            <a href="<?php echo e(url('/login')); ?>"><?php echo e(__('views.welcome.login')); ?></a>
+                        <?php else: ?>
+                            <?php if(auth()->user()->hasRole('administrator')): ?>
+                                <a href="<?php echo e(url('/admin')); ?>"><?php echo e(__('views.welcome.admin')); ?></a>
+                            <?php endif; ?>
+                            <a href="<?php echo e(url('/logout')); ?>"><?php echo e(__('views.welcome.logout')); ?></a>
+                        <?php endif; ?>
+                    <?php endif; ?>
                 </div>
 
             <div class="content">
-                @yield('content')
-                {{-- <div class="footer">
-                    Credits:&nbsp;
-                    <a href="http://netlicensing.io/?utm_source=Laravel_Boilerplate&amp;utm_medium=github&amp;utm_campaign=laravel_boilerplate&amp;utm_content=credits" target="_blank" title="Online Software License Management"><i class="fa fa-lock" aria-hidden="true"></i>NetLicensing</a>&nbsp;&bull;&nbsp;
-                    <a href="https://photolancer.zone/?utm_source=Laravel_Boilerplate&amp;utm_medium=github&amp;utm_campaign=laravel_boilerplate&amp;utm_content=credits" target="_blank" title="Individual digital content for your next campaign"><i class="fa fa-camera-retro" aria-hidden="true"></i>Photolancer Zone</a>
-                </div> --}}
+                <?php echo $__env->yieldContent('content'); ?>
+                
             </div>
         </div>
     </body>
